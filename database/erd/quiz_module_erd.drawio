@@ -1,1 +1,63 @@
-quiz_module_erd.drawio
+<mxfile host="app.diagrams.net">
+  <diagram name="LMS Quiz ERD">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="users" value="users" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="courses" value="courses" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="quizzes" value="quizzes" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="questions" value="questions" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="120" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="options" value="question_options" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="300" y="400" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="attempts" value="quiz_attempts" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="140" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="answers" value="student_answers" style="shape=rectangle" vertex="1" parent="1">
+          <mxGeometry x="80" y="340" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" edge="1" parent="1" source="users" target="attempts">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" edge="1" parent="1" source="courses" target="quizzes">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" edge="1" parent="1" source="quizzes" target="questions">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" edge="1" parent="1" source="questions" target="options">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" edge="1" parent="1" source="attempts" target="answers">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" edge="1" parent="1" source="questions" target="answers">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
