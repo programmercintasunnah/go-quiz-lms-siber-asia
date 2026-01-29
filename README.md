@@ -1,67 +1,83 @@
-Bismillah, API for LMS QUIZ
-
 go-quiz-lms-siber-asia/
-├── README.md                      # Dokumentasi utama
-├── go.mod                         # Go modules
-├── go.sum
-├── .env.example                   # Template environment variables
-├── .gitignore
 │
-├── config/                        # Konfigurasi aplikasi
-│   └── config.go                  # Database config, app settings
+├── cmd/                                    # Main applications
+│   └── api/
+│       └── main.go                        # Entry point aplikasi
 │
-├── database/                      # Database files
-│   ├── migrations/               # DDL Scripts
-│   │   ├── 001_create_tables.sql
-│   │   ├── 002_create_stored_procedures.sql
-│   │   └── 003_seed_data.sql
-│   ├── erd/                      # ERD Diagram
-│   │   └── quiz_module_erd.png
-│   └── queries/                  # SQL queries untuk reporting
-│       └── student_grade_report.sql
-│
-├── internal/                      # Internal application code
-│   ├── models/                   # Data models/entities
+├── internal/                               # Private application code
+│   ├── app/                               # Application initialization
+│   │   ├── app.go                         # App setup & dependency injection
+│   │   └── routes.go                      # Route definitions
+│   │
+│   ├── domain/                            # Domain models (entities)
 │   │   ├── quiz.go
 │   │   ├── question.go
 │   │   ├── attempt.go
 │   │   └── answer.go
 │   │
-│   ├── repositories/             # Database access layer
+│   ├── repository/                        # Data access layer (interface + implementation)
+│   │   ├── repository.go                  # Repository interfaces
 │   │   ├── quiz_repository.go
 │   │   ├── question_repository.go
 │   │   └── attempt_repository.go
 │   │
-│   ├── services/                 # Business logic
+│   ├── service/                           # Business logic layer
+│   │   ├── service.go                     # Service interfaces
 │   │   ├── quiz_service.go
 │   │   └── grading_service.go
 │   │
-│   └── handlers/                 # HTTP handlers (controllers)
-│       ├── quiz_handler.go
-│       └── attempt_handler.go
+│   ├── handler/                           # HTTP handlers (controllers)
+│   │   ├── handler.go                     # Handler interfaces/base
+│   │   ├── quiz_handler.go
+│   │   └── response.go                    # Response helpers
+│   │
+│   └── middleware/                        # HTTP middlewares
+│       ├── cors.go
+│       ├── logger.go
+│       └── error_handler.go
 │
-├── pkg/                          # Shared packages
-│   ├── middleware/               # HTTP middlewares
-│   │   ├── auth.go
-│   │   └── logger.go
-│   ├── response/                 # Standard response format
-│   │   └── response.go
-│   └── validator/                # Input validation
-│       └── validator.go
+├── pkg/                                    # Public libraries (bisa digunakan project lain)
+│   ├── database/                          # Database utilities
+│   │   ├── sqlserver.go                   # SQL Server connection
+│   │   └── transaction.go                 # Transaction helper
+│   │
+│   ├── validator/                         # Custom validators
+│   │   └── validator.go
+│   │
+│   └── utils/                             # Utility functions
+│       ├── time.go
+│       └── string.go
 │
-├── routes/                       # Route definitions
-│   └── routes.go
+├── config/                                 # Configuration
+│   ├── config.go                          # Config struct & loader
+│   └── database.go                        # Database config
 │
-├── docs/                         # Documentation
-│   ├── API.md                    # API Documentation
-│   ├── DATABASE.md               # Database documentation
-│   └── ARCHITECTURE.md           # Architecture explanation
+├── database/                               # Database files
+│   ├── migrations/                        # DDL Scripts
+│   │   ├── 001_create_tables.sql
+│   │   ├── 002_create_stored_procedures.sql
+│   │   └── 003_seed_data.sql
+│   │
+│   ├── erd/                               # ERD Diagram
+│   │   ├── quiz_module_erd.png
+│   │   └── quiz_module_erd.drawio
+│   │
+│   └── queries/                           # SQL queries untuk reporting
+│       └── student_grade_report.sql
 │
-└── main.go                       # Application entry point
-
-# Framework & Libraries yang recommended:
-- github.com/gin-gonic/gin          # Web framework
-- github.com/jmoiron/sqlx           # SQL extensions
-- github.com/denisenkom/go-mssqldb  # SQL Server driver
-- github.com/joho/godotenv          # Environment variables
-- github.com/go-playground/validator/v10  # Validation
+├── docs/                                   # Documentation
+│   ├── API.md                             # API Documentation
+│   ├── DATABASE.md                        # Database schema documentation
+│   ├── ARCHITECTURE.md                    # Architecture explanation
+│   └── HYBRID_GRADING_LOGIC.md           # Hybrid grading flow explanation
+│
+├── scripts/                                # Build & utility scripts
+│   ├── setup_db.sh                        # Database setup script
+│   └── run_migrations.sh                  # Migration runner
+│
+├── .env.example                           # Environment variables template
+├── .gitignore                             # Git ignore rules
+├── go.mod                                 # Go module definition
+├── go.sum                                 # Go module checksums
+├── Makefile                               # Make commands (optional)
+└── README.md                              # Project documentation
