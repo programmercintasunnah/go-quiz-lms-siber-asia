@@ -297,4 +297,4 @@ Urutan eksekusi:
 
 ## Contact
 
-For questions about database schema, contact: [your-email@example.com]
+For questions about database schema, contact: [muhammadzakie22g@gmail.com]

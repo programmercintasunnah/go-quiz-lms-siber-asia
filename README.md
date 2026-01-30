@@ -73,7 +73,7 @@ go-quiz-lms-siber-asia/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/go-quiz-lms-siber-asia.git
+git clone https://github.com/programmercintasunnah/go-quiz-lms-siber-asia.git
 cd go-quiz-lms-siber-asia
 ```
 
@@ -187,6 +187,7 @@ curl -X POST http://localhost:8081/api/v1/quiz/1/start \
 ### ERD Diagram
 
 ![ERD Diagram](database/erd/quiz_module_erd.png)
+![ERD Diagram](database/erd/lms_quiz_module_erd.png)
 
 ### Tables
 
@@ -438,9 +439,9 @@ Error: Migration failed
 ## 👨‍💻 Author
 
 **[Your Name]**
-- Email: your.email@example.com
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- Email: muhammadzakie22g@gmail.com
+- GitHub: [@programmercintasunnah](https://github.com/programmercintasunnah)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/muhammadzakie)
 
 ---
 
@@ -463,8 +464,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Jika ada pertanyaan atau issue:
 
-1. **Email:** your.email@example.com
-2. **GitHub Issues:** [Create Issue](https://github.com/yourusername/go-quiz-lms-siber-asia/issues)
+1. **Email:** muhammadzakie22g@gmail.com
+2. **GitHub Issues:** [Create Issue](https://github.com/programmercintasunnah/go-quiz-lms-siber-asia/issues)
 3. **Documentation:** Check [docs/](docs/) folder
 
 ---
