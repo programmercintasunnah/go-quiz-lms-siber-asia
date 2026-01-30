@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"go-quiz-lms-siber-asia/internal/domain"
 	"go-quiz-lms-siber-asia/internal/repository"
 	"time"
@@ -265,4 +266,56 @@ func (s *QuizService) GetResult(attemptID int) (*domain.QuizResult, error) {
 // GetStudentHistory - Get student quiz history
 func (s *QuizService) GetStudentHistory(userID int) ([]domain.QuizHistory, error) {
 	return s.quizRepo.GetStudentHistory(userID)
+}
+
+// BulkSubmitAnswers - Menyimpan banyak jawaban sekaligus
+func (s *QuizService) BulkSubmitAnswers(attemptID int, req *domain.BulkSubmitAnswerRequest) error {
+	// 1. Validasi attempt masih in_progress
+	attempt, err := s.quizRepo.GetAttemptByID(attemptID)
+	if err != nil {
+		return err
+	}
+	if attempt == nil {
+		return errors.New("attempt not found")
+	}
+	if attempt.Status != "in_progress" {
+		return errors.New("attempt is not in progress")
+	}
+
+	// 2. Loop through all answers
+	for _, answerReq := range req.Answers {
+		// Get question untuk validasi
+		question, err := s.questionRepo.GetByID(answerReq.QuestionID)
+		if err != nil {
+			return fmt.Errorf("question %d not found", answerReq.QuestionID)
+		}
+		if question == nil {
+			return fmt.Errorf("question %d not found", answerReq.QuestionID)
+		}
+
+		// Validasi tipe jawaban
+		if question.QuestionType != answerReq.AnswerType {
+			return fmt.Errorf("answer type mismatch for question %d", answerReq.QuestionID)
+		}
+
+		// Build student answer
+		answer := &domain.StudentAnswer{
+			AttemptID:      attemptID,
+			QuestionID:     answerReq.QuestionID,
+			AnswerText:     answerReq.AnswerText,
+			AnswerFilePath: answerReq.AnswerFilePath,
+			SelectedOption: answerReq.SelectedOption,
+		}
+
+		// Auto-grade
+		s.gradingService.AutoGrade(answer, question.QuestionType, question.CorrectAnswer)
+
+		// Save answer
+		err = s.attemptRepo.SaveAnswer(answer)
+		if err != nil {
+			return fmt.Errorf("failed to save answer for question %d: %w", answerReq.QuestionID, err)
+		}
+	}
+
+	return nil
 }

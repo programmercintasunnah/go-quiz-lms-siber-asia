@@ -9,6 +9,7 @@ type QuizServiceInterface interface {
 	SubmitQuiz(attemptID int) (*domain.SubmitQuizResponse, error)
 	GetResult(attemptID int) (*domain.QuizResult, error)
 	GetStudentHistory(userID int) ([]domain.QuizHistory, error)
+	BulkSubmitAnswers(attemptID int, req *domain.BulkSubmitAnswerRequest) error
 }
 
 // GradingServiceInterface - Interface untuk grading service

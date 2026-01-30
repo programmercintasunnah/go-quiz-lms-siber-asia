@@ -34,6 +34,7 @@ func setupRoutes(router *gin.Engine, quizHandler *handler.QuizHandler) {
 			quiz.POST("/attempt/:attempt_id/answer", quizHandler.SubmitAnswer)
 			quiz.POST("/attempt/:attempt_id/submit", quizHandler.SubmitQuiz)
 			quiz.GET("/attempt/:attempt_id/result", quizHandler.GetResult)
+			quiz.POST("/attempt/:attempt_id/answers/bulk", quizHandler.BulkSubmitAnswers)
 		}
 
 		// Student routes

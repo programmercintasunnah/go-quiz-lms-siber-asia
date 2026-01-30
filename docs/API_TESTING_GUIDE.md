@@ -529,6 +529,29 @@ Jawaban akan di-update dari "A" ke "B".
 
 ---
 
+# Start quiz
+```bash
+curl -X POST http://localhost:8081/api/v1/quiz/4/start \
+  -H "Content-Type: application/json" \
+  -d '{"user_id": 2}' | jq
+```
+
+# Bulk submit (assume attempt_id = 2)
+```bash
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/2/answers/bulk \
+  -H "Content-Type: application/json" \
+  -d '{
+    "answers": [
+      {"question_id": 11, "answer_type": "multiple_choice", "selected_option": "B"},
+      {"question_id": 12, "answer_type": "multiple_choice", "selected_option": "C"},
+      {"question_id": 13, "answer_type": "multiple_choice", "selected_option": "C"},
+      {"question_id": 14, "answer_type": "multiple_choice", "selected_option": "D"},
+      {"question_id": 15, "answer_type": "multiple_choice", "selected_option": "B"}
+    ]
+  }' | jq
+```
+---
+
 ## 🎯 Complete Test Script (Bash)
 
 Simpan sebagai `test_api.sh`:

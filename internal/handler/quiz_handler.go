@@ -126,3 +126,29 @@ func (h *QuizHandler) GetStudentHistory(c *gin.Context) {
 
 	SuccessResponse(c, http.StatusOK, "Quiz history retrieved successfully", history)
 }
+
+// BulkSubmitAnswers - POST /api/v1/quiz/attempt/:attempt_id/answers/bulk
+func (h *QuizHandler) BulkSubmitAnswers(c *gin.Context) {
+	// Get attempt_id from URL
+	attemptID, err := strconv.Atoi(c.Param("attempt_id"))
+	if err != nil {
+		ErrorResponse(c, http.StatusBadRequest, "Invalid attempt ID", err.Error())
+		return
+	}
+
+	// Parse request body
+	var req domain.BulkSubmitAnswerRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		ErrorResponse(c, http.StatusBadRequest, "Invalid request body", err.Error())
+		return
+	}
+
+	// Call service
+	err = h.quizService.BulkSubmitAnswers(attemptID, &req)
+	if err != nil {
+		ErrorResponse(c, http.StatusBadRequest, err.Error(), nil)
+		return
+	}
+
+	SuccessResponse(c, http.StatusOK, "All answers submitted successfully", nil)
+}
