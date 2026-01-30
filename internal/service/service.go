@@ -13,6 +13,6 @@ type QuizServiceInterface interface {
 
 // GradingServiceInterface - Interface untuk grading service
 type GradingServiceInterface interface {
-	AutoGrade(answer *domain.StudentAnswer, questionType string, correctAnswer string)
+	AutoGrade(answer *domain.StudentAnswer, questionType string, correctAnswer *string)
 	CalculateTotalScore(attemptID int) (float64, bool, error)
 }

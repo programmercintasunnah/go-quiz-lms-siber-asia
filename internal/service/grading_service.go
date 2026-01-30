@@ -21,11 +21,11 @@ func NewGradingService(
 }
 
 // AutoGrade - Grade jawaban berdasarkan tipe soal
-func (s *GradingService) AutoGrade(answer *domain.StudentAnswer, questionType string, correctAnswer string) {
+func (s *GradingService) AutoGrade(answer *domain.StudentAnswer, questionType string, correctAnswer *string) {
 	switch questionType {
 	case "multiple_choice":
 		// Auto grade untuk pilihan ganda
-		if answer.SelectedOption != nil && *answer.SelectedOption == correctAnswer {
+		if correctAnswer != nil && answer.SelectedOption != nil && *answer.SelectedOption == *correctAnswer {
 			isCorrect := true
 			answer.IsCorrect = &isCorrect
 			answer.GradingStatus = "auto_graded"

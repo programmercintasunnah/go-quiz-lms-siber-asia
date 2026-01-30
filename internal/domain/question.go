@@ -7,7 +7,7 @@ type Question struct {
 	QuestionType  string           `db:"question_type" json:"question_type"` // multiple_choice, essay, file_upload
 	QuestionText  string           `db:"question_text" json:"question_text"`
 	Points        float64          `db:"points" json:"points"`
-	CorrectAnswer string           `db:"correct_answer" json:"-"` // Hidden from student
+	CorrectAnswer *string          `db:"correct_answer" json:"-"` // Hidden from student
 	OrderNumber   int              `db:"order_number" json:"order_number"`
 	Options       []QuestionOption `json:"options,omitempty"`
 }

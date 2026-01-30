@@ -1,8 +1,6 @@
 -- =============================================
 -- LMS Quiz Module - Seed Data
 -- =============================================
--- Author: [Your Name]
--- Date: 2025-01-29
 -- Description: Sample data untuk testing
 -- =============================================
 
@@ -142,33 +140,33 @@ GO
 -- =============================================
 -- Insert Sample Quiz Attempt (for testing)
 -- =============================================
-IF NOT EXISTS (SELECT * FROM quiz_attempts WHERE user_id = 1 AND quiz_id = 1)
-BEGIN
-    INSERT INTO quiz_attempts (quiz_id, user_id, attempt_number, status, start_time, end_time, total_score)
-    VALUES (1, 1, 1, 'graded', DATEADD(hour, -2, GETDATE()), DATEADD(hour, -1, GETDATE()), 80);
+-- IF NOT EXISTS (SELECT * FROM quiz_attempts WHERE user_id = 1 AND quiz_id = 1)
+-- BEGIN
+--     INSERT INTO quiz_attempts (quiz_id, user_id, attempt_number, status, start_time, end_time, total_score)
+--     VALUES (1, 1, 1, 'graded', DATEADD(hour, -2, GETDATE()), DATEADD(hour, -1, GETDATE()), 80);
     
-    DECLARE @sample_attempt_id INT = SCOPE_IDENTITY();
+--     DECLARE @sample_attempt_id INT = SCOPE_IDENTITY();
     
-    -- Insert sample answers
-    INSERT INTO student_answers (attempt_id, question_id, selected_option, is_correct, grading_status)
-    VALUES 
-    (@sample_attempt_id, 1, 'B', 1, 'auto_graded'), -- Correct
-    (@sample_attempt_id, 2, 'A', 1, 'auto_graded'), -- Correct
-    (@sample_attempt_id, 3, 'B', 0, 'auto_graded'); -- Wrong
+--     -- Insert sample answers
+--     INSERT INTO student_answers (attempt_id, question_id, selected_option, is_correct, grading_status)
+--     VALUES 
+--     (@sample_attempt_id, 1, 'B', 1, 'auto_graded'), -- Correct
+--     (@sample_attempt_id, 2, 'A', 1, 'auto_graded'), -- Correct
+--     (@sample_attempt_id, 3, 'B', 0, 'auto_graded'); -- Wrong
     
-    -- Essay answer
-    INSERT INTO student_answers (attempt_id, question_id, answer_text, manual_score, grading_status)
-    VALUES 
-    (@sample_attempt_id, 4, 'Primitive types are basic data types like int, char, boolean. Reference types are objects and arrays...', 18, 'manually_graded');
+--     -- Essay answer
+--     INSERT INTO student_answers (attempt_id, question_id, answer_text, manual_score, grading_status)
+--     VALUES 
+--     (@sample_attempt_id, 4, 'Primitive types are basic data types like int, char, boolean. Reference types are objects and arrays...', 18, 'manually_graded');
     
-    -- File upload answer
-    INSERT INTO student_answers (attempt_id, question_id, answer_file_path, manual_score, grading_status)
-    VALUES 
-    (@sample_attempt_id, 5, '/uploads/student_1_calculator.java', 42, 'manually_graded');
+--     -- File upload answer
+--     INSERT INTO student_answers (attempt_id, question_id, answer_file_path, manual_score, grading_status)
+--     VALUES 
+--     (@sample_attempt_id, 5, '/uploads/student_1_calculator.java', 42, 'manually_graded');
     
-    PRINT 'Sample quiz attempt inserted successfully';
-END
-GO
+--     PRINT 'Sample quiz attempt inserted successfully';
+-- END
+-- GO
 
 PRINT 'Seed data inserted successfully!';
 GO
