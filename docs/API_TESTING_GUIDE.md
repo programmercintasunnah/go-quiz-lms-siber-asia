@@ -6,7 +6,7 @@
 
 ## 📋 Prerequisites
 
-- Server running di `http://localhost:8080`
+- Server running di `http://localhost:8081`
 - Database sudah di-setup dengan seed data
 - Terminal/Command Prompt
 
@@ -45,7 +45,7 @@ go run cmd/api/main.go
 #### Step 1: Health Check
 
 ```bash
-curl -X GET http://localhost:8080/health
+curl -X GET http://localhost:8081/health
 ```
 
 **Expected Response:**
@@ -61,7 +61,7 @@ curl -X GET http://localhost:8080/health
 #### Step 2: Start Quiz
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/1/start \
+curl -X POST http://localhost:8081/api/v1/quiz/1/start \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1
@@ -100,7 +100,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/1/start \
 #### Step 3a: Submit Answer - Multiple Choice (Question 1)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -123,7 +123,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 #### Step 3b: Submit Answer - Multiple Choice (Question 2)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 2,
@@ -137,7 +137,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 #### Step 3c: Submit Answer - Multiple Choice (Question 3)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 3,
@@ -151,7 +151,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 #### Step 3d: Submit Answer - Essay (Question 4)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 4,
@@ -165,7 +165,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 #### Step 3e: Submit Answer - File Upload (Question 5)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 5,
@@ -179,7 +179,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 #### Step 4: Submit Quiz (Finalize)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/submit \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/submit \
   -H "Content-Type: application/json"
 ```
 
@@ -210,7 +210,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/submit \
 #### Step 5: Get Result
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/quiz/attempt/1/result
+curl -X GET http://localhost:8081/api/v1/quiz/attempt/1/result
 ```
 
 **Expected Response:**
@@ -287,7 +287,7 @@ curl -X GET http://localhost:8080/api/v1/quiz/attempt/1/result
 #### Step 6: Get Student History
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/student/1/quiz-history
+curl -X GET http://localhost:8081/api/v1/student/1/quiz-history
 ```
 
 **Expected Response:**
@@ -319,7 +319,7 @@ curl -X GET http://localhost:8080/api/v1/student/1/quiz-history
 ### Test 1: Start Quiz - Quiz Not Found
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/999/start \
+curl -X POST http://localhost:8081/api/v1/quiz/999/start \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1
@@ -340,7 +340,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/999/start \
 ### Test 2: Start Quiz - Invalid User ID
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/1/start \
+curl -X POST http://localhost:8081/api/v1/quiz/1/start \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 0
@@ -362,16 +362,16 @@ curl -X POST http://localhost:8080/api/v1/quiz/1/start \
 
 ```bash
 # Jalankan 3 kali (jika retake_limit = 2)
-curl -X POST http://localhost:8080/api/v1/quiz/1/start \
+curl -X POST http://localhost:8081/api/v1/quiz/1/start \
   -H "Content-Type: application/json" \
   -d '{"user_id": 2}'
 
-curl -X POST http://localhost:8080/api/v1/quiz/1/start \
+curl -X POST http://localhost:8081/api/v1/quiz/1/start \
   -H "Content-Type: application/json" \
   -d '{"user_id": 2}'
 
 # Yang ketiga akan error
-curl -X POST http://localhost:8080/api/v1/quiz/1/start \
+curl -X POST http://localhost:8081/api/v1/quiz/1/start \
   -H "Content-Type: application/json" \
   -d '{"user_id": 2}'
 ```
@@ -390,7 +390,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/1/start \
 ### Test 4: Submit Answer - Invalid Answer Type
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -413,7 +413,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 ### Test 5: Submit Answer - Attempt Not Found
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/999/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/999/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -437,7 +437,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/999/answer \
 
 ```bash
 # Setelah quiz sudah di-submit
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -462,7 +462,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 ### Multiple Choice Answer
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -476,7 +476,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 ### Essay Answer
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 4,
@@ -490,7 +490,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
 ### File Upload Answer
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 5,
@@ -507,7 +507,7 @@ Kamu bisa submit jawaban lagi untuk soal yang sama (akan di-update):
 
 ```bash
 # Submit pertama
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -516,7 +516,7 @@ curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
   }'
 
 # Submit kedua (update jawaban)
-curl -X POST http://localhost:8080/api/v1/quiz/attempt/1/answer \
+curl -X POST http://localhost:8081/api/v1/quiz/attempt/1/answer \
   -H "Content-Type: application/json" \
   -d '{
     "question_id": 1,
@@ -536,7 +536,7 @@ Simpan sebagai `test_api.sh`:
 ```bash
 #!/bin/bash
 
-BASE_URL="http://localhost:8080"
+BASE_URL="http://localhost:8081"
 
 echo "==================================="
 echo "LMS Quiz Module - API Testing"
@@ -635,31 +635,31 @@ brew install jq
 Tambahkan `| jq` di akhir curl:
 
 ```bash
-curl -X GET http://localhost:8080/health | jq
+curl -X GET http://localhost:8081/health | jq
 ```
 
 ### 2. Save Response to File
 
 ```bash
-curl -X GET http://localhost:8080/health > response.json
+curl -X GET http://localhost:8081/health > response.json
 ```
 
 ### 3. Show HTTP Headers
 
 ```bash
-curl -i -X GET http://localhost:8080/health
+curl -i -X GET http://localhost:8081/health
 ```
 
 ### 4. Verbose Mode (Debug)
 
 ```bash
-curl -v -X GET http://localhost:8080/health
+curl -v -X GET http://localhost:8081/health
 ```
 
 ### 5. Set Timeout
 
 ```bash
-curl --max-time 10 -X GET http://localhost:8080/health
+curl --max-time 10 -X GET http://localhost:8081/health
 ```
 
 ---
@@ -669,7 +669,7 @@ curl --max-time 10 -X GET http://localhost:8080/health
 ### Error: Connection Refused
 
 ```
-curl: (7) Failed to connect to localhost port 8080: Connection refused
+curl: (7) Failed to connect to localhost port 8081: Connection refused
 ```
 
 **Solution:** Server belum running. Jalankan:
